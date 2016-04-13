@@ -1,0 +1,3 @@
+To build the database successfully, follow the order of file execution:
+	- CreateDatabase.sql
+	- FFmpegDatabase.sql
