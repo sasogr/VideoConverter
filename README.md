@@ -1,2 +1,4 @@
 # VideoConverter
-Faculty project - web application that utilizies FFmpeg to convert videos.
+Faculty project - Web application that utilizes terminal application for video converting
+
+###MORE INFO COMING SOON

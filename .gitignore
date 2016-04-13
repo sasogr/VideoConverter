@@ -1,0 +1,12 @@
+# Build folder #
+/build/
+
+# Package files #
+*.war
+*.ear
+
+# Classpath#
+.classpath
+
+# Windows specific folder #
+/bin/
