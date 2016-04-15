@@ -32,7 +32,6 @@ public class ConvertControllerREST {
         Connection con = null;
         ResultSet rs = null;
         JSONArray responseList = new JSONArray();
-        //List<JSONObject> responseList = new ArrayList<JSONObject>();
         
         try {
         	// Establish the connection.
