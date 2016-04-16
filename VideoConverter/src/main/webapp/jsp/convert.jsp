@@ -31,6 +31,8 @@
 		<br />
 		<br />
 		<button name="addOption" id="addOption" ng-click="addOption(selectedOption, optionValue)">Add option</button>
+		<button name="clearOptions" id="clearOptions" ng-click="clearOptions()">Clear options</button>
+		<button name="executeCommand" id="executeCommand" ng-click="executeCommand()">Execute command</button>
 	</div>
 	<div>
 		<p>Created command:</p>

@@ -6,6 +6,8 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 	$scope.commandToExecute = '';
 	// Holds the options for the previously selected command.
 	$scope.optionsToExecute = '';
+	// Holds the execute command.
+	$scope.finalCommandToBeExecuted = '';
 	
 	$scope.getCommands = function () {
 		$http.get(
@@ -54,6 +56,16 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 			// Otherwise, add empty space for further options.
 			$scope.optionsToExecute += ' ';
 		}
+	}
+	
+	$scope.clearOptions = function() {
+		$scope.optionsToExecute = '';
+	}
+	
+	$scope.executeCommand = function() {
+		// Create the final command that will be executed in the backend.
+		$scope.finalCommandToBeExecuted = $scope.commandToExecute + $scope.optionsToExecute;
+		
 	}
 	
 	// On module load, always run the functions below.
