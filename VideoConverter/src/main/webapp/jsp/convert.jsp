@@ -14,9 +14,17 @@
 <body ng-controller="ConvertController">
 	<h1>Step 2. Run commands</h1>
 	
-	<p>Choose a command:</p>
-	<select ng-change="changefunction(item)" ng-model="item">
-		<option ng-repeat="item in commands" value="{{item.commandValue}}">{{item.name}}</option>
-	</select>
+	<div>
+		<p>Choose a command:</p>
+		<select name="commandSelect" id="commandSelect" ng-change="commandChange()" ng-model="newCommand">
+			<option ng-repeat="item in commands" value="{{item.commandValue}}">{{item.name}}</option>
+		</select>
+	</div>
+	<div>
+		<p>Choose an option:</p>
+		<select name="optionSelect" id="optionSelect" ng-model="newOption">
+			<option ng-repeat="item in options" value="{{item.commandValue}}">{{item.name}}</option>
+		</select>
+	</div>
 </body>
 </html>
