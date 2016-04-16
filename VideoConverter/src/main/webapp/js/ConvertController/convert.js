@@ -32,6 +32,8 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
                 $scope.options = data;
                 // Update the command that needs to be executed.
                 $scope.commandToExecute = $scope.selectedCommand.commandValue + ' ';
+                // Remove all the previously selected options, because the newly selected command has another options.
+                $scope.optionsToExecute = '';
             }
         })
         .error(function (data, status) {
