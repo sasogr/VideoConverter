@@ -18,21 +18,9 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 		
 	}
 	
-	$scope.commandChange = function() {
-		var userChangedCommand;
-		
-		if($scope.newCommand == 'ffprobe') {
-			userChangedCommand = 1;
-		}
-		else if($scope.newCommand == 'ffmpeg') {
-			userChangedCommand = 2;
-		}
-		else {
-			userChangedCommand = 0;
-		}
-		
+	$scope.commandChange = function() {		
 		$http.post(
-				'rest/convert/getoptions/' + userChangedCommand
+				'rest/convert/getoptions/' + $scope.selectedCommand.id
 		)
 		.success(function (data, status) {
             if (status == 200) {

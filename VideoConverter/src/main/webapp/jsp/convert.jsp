@@ -16,15 +16,16 @@
 	
 	<div>
 		<p>Choose a command:</p>
-		<select name="commandSelect" id="commandSelect" ng-change="commandChange()" ng-model="newCommand">
-			<option ng-repeat="item in commands" value="{{item.commandValue}}">{{item.name}}</option>
+		<select name="commandSelect" id="commandSelect" ng-options="command as command.commandValue for command in commands" 
+				ng-model="selectedCommand" ng-change="commandChange()">
+			<option value="">-- please select --</option>
 		</select>
 	</div>
 	<div>
 		<p>Choose an option:</p>
-		<select name="optionSelect" id="optionSelect" ng-model="newOption">
-			<option ng-repeat="item in options" value="{{item.commandValue}}">{{item.name}}</option>
-		</select>
+		<select name="optionSelect" id="optionSelect" ng-options="option as option.commandValue for option in options" ng-model="selectedOption"></select>
+		
+		<input type="text" name="optionValue" id="optionValue" ng-show="selectedOption.acceptInput == 1">
 	</div>
 </body>
 </html>
