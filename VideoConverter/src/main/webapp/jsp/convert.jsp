@@ -23,9 +23,18 @@
 	</div>
 	<div>
 		<p>Choose an option:</p>
-		<select name="optionSelect" id="optionSelect" ng-options="option as option.commandValue for option in options" ng-model="selectedOption"></select>
+		<select name="optionSelect" id="optionSelect" ng-options="option as option.commandValue for option in options" 
+				ng-model="selectedOption"></select>
 		
-		<input type="text" name="optionValue" id="optionValue" ng-show="selectedOption.acceptInput == 1">
+		<input type="text" name="optionValue" id="optionValue" ng-show="selectedOption.acceptInput == 1" ng-model="optionValue">
+		
+		<br />
+		<br />
+		<button name="addOption" id="addOption" ng-click="addOption(selectedOption, optionValue)">Add option</button>
+	</div>
+	<div>
+		<p>Created command:</p>
+		{{commandToExecute}}{{optionsToExecute}}
 	</div>
 </body>
 </html>
