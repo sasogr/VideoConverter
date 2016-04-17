@@ -66,6 +66,19 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 		// Create the final command that will be executed in the backend.
 		$scope.finalCommandToBeExecuted = $scope.commandToExecute + $scope.optionsToExecute;
 		
+		$http.post(
+				'rest/convert/executeCommand/' + $scope.finalCommandToBeExecuted
+		)
+		.success(function (data, status) {
+            if (status == 200) {
+                
+            }
+        })
+        .error(function (data, status) {
+            $log.info("REST POST: rest/convert/executeCommand -- request failed");
+            alert("Ooops! It seems we have problem in our application. Please contact the administrator!");
+        });
+		
 	}
 	
 	// On module load, always run the functions below.

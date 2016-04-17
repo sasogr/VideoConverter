@@ -35,7 +35,7 @@
 		<button name="executeCommand" id="executeCommand" ng-click="executeCommand()">Execute command</button>
 	</div>
 	<div>
-		<p>Created command:</p>
+		<p>Preview of the command:</p>
 		{{commandToExecute}}{{optionsToExecute}}
 	</div>
 </body>

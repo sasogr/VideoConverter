@@ -152,4 +152,12 @@ public class ConvertControllerREST {
         String response = "" + responseList;
         return Response.status(200).entity(response).build();
 	}
+	
+	@POST
+	@Path("/executeCommand/{command}")
+	@Produces("application/json")
+	public Response executeCommand(@PathParam("command") String _command) throws JSONException {
+		
+		return Response.status(200).build();
+	}
 }
