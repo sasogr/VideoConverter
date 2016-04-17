@@ -9,7 +9,7 @@
 .classpath
 
 # Windows specific folder #
-/bin/
+VideoConverter/bin/
 
 # Maven specific #
 target/
