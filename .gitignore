@@ -11,6 +11,10 @@
 # Windows specific folder #
 VideoConverter/bin/
 
+# .project and .settings
+VideoConverter/.project
+VideoConverter/.settings
+
 # Maven specific #
 target/
 pom.xml.tag
