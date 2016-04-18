@@ -49,6 +49,11 @@
 		<artifactId>mysql-connector-java</artifactId>
 		<version>5.1.38</version>
 	</dependency>
+	<dependency>
+    <groupId>commons-codec</groupId>
+    <artifactId>commons-codec</artifactId>
+    <version>1.6</version>
+</dependency>
   </dependencies>
   <build>
     <finalName>VideoConverter</finalName>

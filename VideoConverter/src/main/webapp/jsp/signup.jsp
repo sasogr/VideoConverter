@@ -62,13 +62,12 @@
     </head>
     <body>
         <div id="container">
-            <form action="CreateUserServlet" method="post" >
+            <form action="/VideoConverter/CreateUserServlet" method="post" >
                 <h1>Register</h1>
                 <div class="line"><label for="firstName"> First Name *: </label><input type="text" name="firstName"  /></div>
                 <div class="line"><label for="lastName">Last Name *: </label><input type="text" name="lastName" /></div>
                 <div class="line"><label for="username">Username *: </label><input type="text" name="username" /></div>
                 <div class="line"><label for="pwd">Password *: </label><input type="password" name="password" /></div>
-                <div class="line"><label for="dob">Date of Birth *: </label><input type="text" name="dob" /></div>
                 <div class="line"><label for="email">Email *: </label><input type="email" name="email" /></div>
               
                 <div class="line submit"><input type="submit" value="Submit" /></div>

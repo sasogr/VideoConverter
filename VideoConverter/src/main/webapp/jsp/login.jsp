@@ -148,7 +148,7 @@
 
             <!-- Begin Page Content -->
             <div id="container">
-                <form action="homepage" method="post"  >
+                <form action="/VideoConverter/LoginServlet" method="post"  >
                     <label for="loginmsg" style="color:hsla(0,100%,50%,0.5); font-family:"Helvetica Neue",Helvetica,sans-serif;"><?php  echo @$_GET['msg'];?></label>
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username">

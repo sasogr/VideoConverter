@@ -11,16 +11,16 @@ public class User {
 	private String lastName;
 
 	private String password;
-	private String birthdate;
+	
 	private String email;
 	public User(String firstName, String lastName, String username,
-			String password, String birthdate, String email) {
+			String password, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
-		this.birthdate = birthdate;
+		
 		this.email = email;
 	}
 
@@ -58,13 +58,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getBirthdate() {
-		return birthdate;
-	}
-
-	public void setBirthdate(String birthdate) {
-		this.birthdate = birthdate;
-	}
 
 	public String getEmail() {
 		return email;
@@ -78,7 +71,7 @@ public class User {
 	public String toString() {
 		return "User [username=" + username + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", password=" + password
-				+ ", birthdate=" + birthdate + ", email=" + email + "]";
+				+  ", email=" + email + "]";
 	}
 
 	

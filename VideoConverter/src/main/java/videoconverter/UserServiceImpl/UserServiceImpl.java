@@ -1,7 +1,11 @@
 package videoconverter.UserServiceImpl;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -22,7 +26,7 @@ public  class UserServiceImpl {
 	   static final String USER = dbconfig.GetUsernameDB();
 	   static final String PASS = dbconfig.GetPasswordDB();
 	   
-	public static void createUser(String username,String firstName,String lastName,String password,String birthdate,String email){
+	public static void createUser(String username,String firstName,String lastName,String password,String email){
 		 Connection conn = null;
 		   Statement stmt = null;
 		   try{
@@ -38,16 +42,16 @@ public  class UserServiceImpl {
 		      
 		      stmt = (Statement) conn.createStatement();
 		      
-		      String sql = "INSERT INTO user (username, firstName, lastName,password,birthdate,email)" +
-		    	        "VALUES (?, ?, ?,?,?,?)";
+		      String sql = "INSERT INTO user (username, firstName, lastName,password,email)" +
+		    	        "VALUES (?, ?, ?,?,?)";
 		      
 		      PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 		      ps.setString(1, username);
 		      ps.setString(2, firstName);
 		      ps.setString(3, lastName);
 		      ps.setString(4, password);
-		      ps.setString(5, birthdate);
-		      ps.setString(6, email);
+		    
+		      ps.setString(5, email);
 		      
 		      ps.executeUpdate();
 		   }catch(SQLException se){
@@ -72,4 +76,83 @@ public  class UserServiceImpl {
 		   }//end try
 		  
 	}
+	 public static JSONArray check(String username, String password) throws ClassNotFoundException {
+		 Connection conn = null;
+		   Statement stmt = null;
+	    //    String hashPass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+	       String hashPass= org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+	       
+	        JSONObject error = new JSONObject();
+	        JSONObject success = new JSONObject();
+	        JSONArray response = new JSONArray();
+
+	        if (username.trim().equals("") || password.trim().equals("")) {
+	            if (username.trim().equals("")) {
+	                JSONObject err = new JSONObject();
+	                err.put("error", "error");
+	                err.put("errorMessage", "Vnesete username");
+
+	                response.put(err);
+	            }
+
+	            if (password.trim().equals("")) {
+	                JSONObject err = new JSONObject();
+	                err.put("error", "errorPassword");
+	                err.put("errorMessage", "Vnesete lozinka");
+
+	                response.put(err);
+	            }
+	        }
+	        else {
+	            try {
+	            	 Class.forName("com.mysql.jdbc.Driver");
+	   		      
+	     		    //STEP 3: Open a connection
+	     		    
+	     		      conn = (Connection) DriverManager.getConnection(DB_URL, USER, PASS);
+	     		     
+	     		      
+	     		      //STEP 4: Execute a query
+	     		      
+	     		      stmt = (Statement) conn.createStatement();
+	     		      
+	     		     String sql = "SELECT username, password FROM user where username= '" + username + "'";
+	     		      
+	     		      PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+
+	               
+	                ResultSet rs = stmt.executeQuery(sql);
+
+	                if (rs.next()) {
+	                    String pass = rs.getString("password");
+	                   String id = rs.getString("username");
+	                    System.out.println(pass);
+	                    System.out.println(hashPass);
+	                    if (pass.equals(hashPass)) {
+	                        // login
+	                        success.put("success", id);
+	                        response.put(success);
+	                    }
+	                    else {
+	                        // pogresen password
+	                        error.put("error", "errorPassword");
+	                        error.put("errorMessage", "Pogresna lozinka");
+
+	                        response.put(error);
+	                    }
+	                }
+	                else {
+	                    // ne postoi takov email
+	                    error.put("error", "errorEmail");
+	                    error.put("errorMessage", "Ne postoi takov email");
+
+	                    response.put(error);
+	                }
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        return  response;
+	    }
 }
