@@ -8,6 +8,8 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 	$scope.optionsToExecute = '';
 	// Holds the execute command.
 	$scope.finalCommandToBeExecuted = '';
+	// Holds the execution output of the terminal.ss
+	$scope.terminalOutput = '';
 	
 	$scope.getCommands = function () {
 		$http.get(
@@ -71,7 +73,7 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 		)
 		.success(function (data, status) {
             if (status == 200) {
-                
+            	$scope.terminalOutput += data;
             }
         })
         .error(function (data, status) {
@@ -79,6 +81,10 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
             alert("Ooops! It seems we have problem in our application. Please contact the administrator!");
         });
 		
+	}
+	
+	$scope.clearTerminal = function() {
+		$scope.terminalOutput = '';
 	}
 	
 	// On module load, always run the functions below.

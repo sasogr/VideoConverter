@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>VideoConverter | FFmpeg</title>
+	<link rel="stylesheet" type="text/css" href="css/Site.css">
 	<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
@@ -37,6 +38,15 @@
 	<div>
 		<p>Preview of the command:</p>
 		{{commandToExecute}}{{optionsToExecute}}
+	</div>
+	
+	<div class="command-output-outer">
+		<p>Execution output:</p>
+		<div class="command-output-inner">
+			{{terminalOutput.executionOutput}}
+		</div>
+		
+		<button name="clearTerminal" id="clearTerminal" ng-click="clearTerminal()">Clear terminal</button>
 	</div>
 </body>
 </html>
