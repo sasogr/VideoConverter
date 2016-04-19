@@ -12,6 +12,8 @@
 	</form>
 	
 	<br />
+	<a href="LoginServlet">Login</a>
+	<br />
 	<a href="Convert">/Convert path</a>
 </body>
 </html>
