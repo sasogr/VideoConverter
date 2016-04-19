@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import videoconverter.businesslogic.FFmpegTerminal;
 import videoconverter.dbconfig.Dbconfig;
 
 @Path("/convert")
@@ -157,7 +158,15 @@ public class ConvertControllerREST {
 	@Path("/executeCommand/{command}")
 	@Produces("application/json")
 	public Response executeCommand(@PathParam("command") String _command) throws JSONException {
+		FFmpegTerminal terminal = new FFmpegTerminal();
+		terminal.SetTerminalCommand(_command);
 		
-		return Response.status(200).build();
+		String executionOutput = terminal.ExecuteCommand();
+		
+		JSONObject jobj = new JSONObject();
+		jobj.put("executionOutput", executionOutput);
+		
+		String response = "" + jobj;
+		return Response.status(200).entity(response).build();
 	}
 }
