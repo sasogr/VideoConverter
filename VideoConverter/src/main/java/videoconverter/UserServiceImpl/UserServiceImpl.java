@@ -76,9 +76,10 @@ public  class UserServiceImpl {
 		   }//end try
 		  
 	}
-	 public static JSONArray check(String username, String password) throws ClassNotFoundException {
+	 public static int check(String username, String password) throws ClassNotFoundException {
 		 Connection conn = null;
 		   Statement stmt = null;
+		   int RESULT = 1;
 	    //    String hashPass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
 	       String hashPass= org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
 	       
@@ -93,13 +94,14 @@ public  class UserServiceImpl {
 	                err.put("errorMessage", "Vnesete username");
 
 	                response.put(err);
+	                RESULT = 0;
 	            }
 
 	            if (password.trim().equals("")) {
 	                JSONObject err = new JSONObject();
 	                err.put("error", "errorPassword");
 	                err.put("errorMessage", "Vnesete lozinka");
-
+	                RESULT = 0;
 	                response.put(err);
 	            }
 	        }
@@ -126,15 +128,16 @@ public  class UserServiceImpl {
 	                if (rs.next()) {
 	                    String pass = rs.getString("password");
 	                   String id = rs.getString("username");
-	                    System.out.println(pass);
-	                    System.out.println(hashPass);
+	                  
 	                    if (pass.equals(hashPass)) {
 	                        // login
+	                    	RESULT = 1;
 	                        success.put("success", id);
 	                        response.put(success);
 	                    }
 	                    else {
 	                        // pogresen password
+	                    	RESULT = 0;
 	                        error.put("error", "errorPassword");
 	                        error.put("errorMessage", "Pogresna lozinka");
 
@@ -143,6 +146,7 @@ public  class UserServiceImpl {
 	                }
 	                else {
 	                    // ne postoi takov email
+	                	RESULT = 0;
 	                    error.put("error", "errorEmail");
 	                    error.put("errorMessage", "Ne postoi takov email");
 
@@ -153,6 +157,6 @@ public  class UserServiceImpl {
 	            }
 	        }
 
-	        return  response;
+	        return RESULT;
 	    }
 }
