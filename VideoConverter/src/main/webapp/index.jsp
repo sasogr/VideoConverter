@@ -15,5 +15,7 @@
 	<a href="LoginServlet">Login</a>
 	<br />
 	<a href="Convert">/Convert path</a>
+	<br />
+	<a href="/VideoConverter/UploadServlet">Upload</a>
 </body>
 </html>
