@@ -16,6 +16,9 @@ public class UserFolderStructure {
 		this.username = _username;
 	}
 	
+	/**
+	 * Creates user folder structure.
+	 */
 	public void CreateUserFolders() {
 		File videoconverterDir = new File("/home/videoconverter/" + this.username + "/");
 		File videoconverterUpload = new File("/home/videoconverter/" + this.username + "/upload/");
@@ -54,5 +57,29 @@ public class UserFolderStructure {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * Checks the user folder structure, i.e. if all the folders exist.
+	 * 
+	 * @return boolean value, true - folder structure exists; false - otherwise.
+	 */
+	public boolean CheckUserFolders() {
+		boolean userStructureExists = false;
+		
+		File videoconverterDir = new File("/home/videoconverter/" + this.username + "/");
+		File videoconverterUpload = new File("/home/videoconverter/" + this.username + "/upload/");
+		File videoconverterDownload = new File("/home/videoconverter/" + this.username + "/download/");
+		
+		if(videoconverterDir.exists() && videoconverterUpload.exists() && videoconverterDownload.exists()) {
+			// All the folders exist.
+			userStructureExists = true;
+		}
+		else {
+			// Problem with the structure.
+			userStructureExists = false;
+		}
+	
+		return userStructureExists;
 	}
 }
