@@ -42,15 +42,14 @@ public  class UserServiceImpl {
 		      
 		      stmt = (Statement) conn.createStatement();
 		      
-		      String sql = "INSERT INTO user (username, firstName, lastName,password,email)" +
-		    	        "VALUES (?, ?, ?,?,?)";
+		      String sql = "INSERT INTO USER (username, firstName, lastName, password, email)" +
+		    	        "VALUES (?, ?, ?, ?, ?)";
 		      
 		      PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 		      ps.setString(1, username);
 		      ps.setString(2, firstName);
 		      ps.setString(3, lastName);
 		      ps.setString(4, password);
-		    
 		      ps.setString(5, email);
 		      
 		      ps.executeUpdate();
@@ -118,7 +117,7 @@ public  class UserServiceImpl {
 	     		      
 	     		      stmt = (Statement) conn.createStatement();
 	     		      
-	     		     String sql = "SELECT username, password FROM user where username= '" + username + "'";
+	     		     String sql = "SELECT username, password FROM USER where username= '" + username + "'";
 	     		      
 	     		      PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 

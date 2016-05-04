@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Cookie [] cookies = request.getCookies();
 		boolean flag = false;
-		if(cookies != null){
+		/*if(cookies != null){
 			for(Cookie cookie:cookies){
 				if(cookie.getName().equals("username"))
 				{
@@ -44,11 +44,11 @@ public class LoginServlet extends HttpServlet {
 				}
 				
 			}
-			if(!flag){
+			if(!flag){*/
 				request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
-			}
+			//}
 			
-		}
+		//}
 	}
 
 	/**
