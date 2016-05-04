@@ -19,46 +19,43 @@ public class UserFolderStructure {
 		this.username = _username;
 	}
 	
-	public boolean CreateUserFolders() {
-		boolean foldersCreated = false;
-		
-		// Exception: java.nio.file.AccessDeniedException
-		Path path = Paths.get("/home/videoconverter/" + this.username + "/");
-
-		if(!Files.exists(path)) {
-			try {
-				Files.createDirectories(path);
-			}
-			catch(IOException io) {
-				io.printStackTrace();
-			}
-		}
-		
-		// NOT WORKING - NO EXCEPTION THROWN AT ALL
-		/*File videoconverterDir = new File("/home/videoconverter/" + this.username + "/");
+	public void CreateUserFolders() {
+		File videoconverterDir = new File("/home/videoconverter/" + this.username + "/");
 		File videoconverterUpload = new File("/home/videoconverter/" + this.username + "/upload/");
 		File videoconverterDownload = new File("/home/videoconverter/" + this.username + "/download/");
 		
-		if(!videoconverterDir.exists()) {
-			// Directory does not exist, create it.
-			videoconverterDir.mkdir();
-			
-			if(!videoconverterUpload.exists()) {
-				// Create upload directory.
-				videoconverterUpload.mkdir();
+		try {
+			if(!videoconverterDir.exists()) {
+				// Directory does not exist, create it.
+				videoconverterDir.mkdir();
+				
+				if(!videoconverterUpload.exists()) {
+					// Create upload directory.
+					videoconverterUpload.mkdir();
+				}
+				
+				if(!videoconverterDownload.exists()) {
+					// Create download directory.
+					videoconverterDownload.mkdir();
+				}
 			}
-			
-			if(!videoconverterDownload.exists()) {
-				// Create download directory.
-				videoconverterDownload.mkdir();
+			else {
+				// Directory does exist. Check if sub-directories exist. If they don't, create them.
+				
+				if(!videoconverterUpload.exists()) {
+					// Create upload directory.
+					videoconverterUpload.mkdir();
+				}
+				
+				if(!videoconverterDownload.exists()) {
+					// Create download directory.
+					videoconverterDownload.mkdir();
+				}
 			}
-			
-			foldersCreated = true;
 		}
-		else {
-			foldersCreated = true;
-		}*/
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 
-		return foldersCreated;
 	}
 }
