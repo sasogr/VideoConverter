@@ -46,9 +46,15 @@ public class CreateUserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String passwordEnc = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
 		String email = request.getParameter("email");
-		UserServiceImpl.createUser(username, firstName, lastName, passwordEnc, email);
+		boolean userCreated = UserServiceImpl.createUser(username, firstName, lastName, passwordEnc, email);
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if(userCreated == true) {
+			response.sendRedirect("LoginServlet");
+		}
+		else {
+			request.getRequestDispatcher("/jsp/signup.jsp").forward(request, response);
+		}
+
 	}
 
 }
