@@ -10,6 +10,7 @@ public class FolderStructureNaming {
 	private String globalPath = "/home/videoconverter/";
 	private String pathUpload = "/upload/";
 	private String pathDownload = "/download/";
+	private String pathSlash = "/";
 	
 	public FolderStructureNaming() {
 		// Empty constructor.
@@ -25,5 +26,9 @@ public class FolderStructureNaming {
 	
 	public String GetPathDownload() {
 		return this.pathDownload;
+	}
+	
+	public String GetPathSlash() {
+		return this.pathSlash;
 	}
 }
