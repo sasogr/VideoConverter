@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 
 import videoconverter.UserServiceImpl.UserServiceImpl;
+import videoconverter.model.SessionUser;
 
 /**
  * Servlet implementation class LoginServlet
@@ -30,32 +31,15 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Cookie [] cookies = request.getCookies();
-		boolean flag = false;
-		/*if(cookies != null){
-			for(Cookie cookie:cookies){
-				if(cookie.getName().equals("username"))
-				{
-					flag = true;
-					request.getRequestDispatcher("index.jsp").forward(request, response);
-					
-				}
-				
-			}
-			if(!flag){*/
-				request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
-			//}
-			
-		//}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		 response.setContentType("application/json");
 	        response.setCharacterEncoding("utf-8");
 		String username = request.getParameter("username");
@@ -69,11 +53,16 @@ public class LoginServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       // response.getWriter().write(resp.toString());
+
 		if(result == 1){
-			Cookie cookie = new Cookie("username", username);
-			response.addCookie(cookie);
-			request.getRequestDispatcher("index.jsp").forward(request,response);
+			// User is logged in. Set session for the user.
+			HttpSession session = request.getSession(true);
+			
+			SessionUser sessionUser = new SessionUser();
+			sessionUser.SetUsername(username);
+			session.setAttribute("sessionUser", sessionUser);
+			
+			response.sendRedirect("UploadServlet");
 		}else{
 			request.getRequestDispatcher("/jsp/login.jsp").forward(request,response);
 		}
