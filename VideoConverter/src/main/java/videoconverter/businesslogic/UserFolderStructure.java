@@ -1,10 +1,7 @@
 package videoconverter.businesslogic;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 /**
  * Creates the /home/videoconverter/{username}/upload and /home/videoconverter/{username}/download folders for storing videos.
