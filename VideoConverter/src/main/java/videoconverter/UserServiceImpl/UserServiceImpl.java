@@ -11,6 +11,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
+import videoconverter.businesslogic.UserFolderStructure;
 import videoconverter.dbconfig.Dbconfig;
 
 public  class UserServiceImpl {
@@ -26,9 +27,12 @@ public  class UserServiceImpl {
 	   static final String USER = dbconfig.GetUsernameDB();
 	   static final String PASS = dbconfig.GetPasswordDB();
 	   
-	public static void createUser(String username,String firstName,String lastName,String password,String email){
-		 Connection conn = null;
+	public static boolean createUser(String username,String firstName,String lastName,String password,String email){
+	 	   Connection conn = null;
 		   Statement stmt = null;
+		   
+		   boolean userCreated = false;
+		   
 		   try{
 		      //STEP 2: Register JDBC driver
 		      Class.forName("com.mysql.jdbc.Driver");
@@ -53,6 +57,13 @@ public  class UserServiceImpl {
 		      ps.setString(5, email);
 		      
 		      ps.executeUpdate();
+		      
+		      // Create user directories for storing videos.
+		      UserFolderStructure userFolders = new UserFolderStructure(username);
+		      userFolders.CreateUserFolders();
+		      
+		      userCreated = true;
+		      
 		   }catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
@@ -73,6 +84,8 @@ public  class UserServiceImpl {
 		         se.printStackTrace();
 		      }//end finally try
 		   }//end try
+		   
+		   return userCreated;
 		  
 	}
 	 public static int check(String username, String password) throws ClassNotFoundException {
