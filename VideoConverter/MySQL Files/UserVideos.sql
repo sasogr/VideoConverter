@@ -1,0 +1,11 @@
+USE videoconverter;
+
+# Create the videos table
+CREATE TABLE USER_VIDEOS(
+	videoID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(255),
+	videoUploaded TINYINT(1),
+	videoName VARCHAR(10000),
+	FOREIGN KEY (username) REFERENCES USER(username)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
