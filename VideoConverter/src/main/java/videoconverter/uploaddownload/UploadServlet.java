@@ -3,17 +3,20 @@ package videoconverter.uploaddownload;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.FilenameUtils;
 
 import videoconverter.dbconfig.Dbconfig;
+import videoconverter.folderstructure.FolderStructureNaming;
 import videoconverter.model.SessionUser;
 
 @WebServlet("/UploadServlet")
@@ -21,18 +24,12 @@ import videoconverter.model.SessionUser;
 		maxFileSize = 1024 * 1024 *50, // 50MB
 		maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class UploadServlet extends HttpServlet {
-
-	/**
-	 * Name of the directory where uploaded files will be saved, relative to the
-	 * web application directory.
-	 */
-	
+	private static final long serialVersionUID = 1L;
+	private FolderStructureNaming folderNaming = new FolderStructureNaming();
 
 	static final Dbconfig dbconfig = new Dbconfig();
 	static final String USER = dbconfig.GetUsernameDB();
-	private static final String SAVE_DIR = USER+"/upload";
 	private boolean validFormat=true;
-	private SessionUser user=new SessionUser();
 
 	/**
 	 * handles file upload
@@ -40,40 +37,59 @@ public class UploadServlet extends HttpServlet {
 	 * @throws ServletException 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		request.getRequestDispatcher("/jsp/upload.jsp").forward(request, response);
+		HttpSession session = request.getSession(true);
+		SessionUser sessionUser = (SessionUser)session.getAttribute("sessionUser");
+		
+		if(sessionUser == null) {
+			// Redirect the user to the login page.
+			response.sendRedirect("LoginServlet");
+		}
+		else {
+			request.getRequestDispatcher("/jsp/upload.jsp").forward(request, response);
+		}
+		
+		
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// gets absolute path of the web application
-		String appPath = request.getServletContext().getRealPath("");//zavisi kako vi e patot na serverot, jas so ovoj rabotev
-		// constructs path of the directory to save uploaded file
-		String savePath = appPath + File.separator + SAVE_DIR;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		SessionUser sessionUser = (SessionUser)session.getAttribute("sessionUser");
 		
-		for (Part part : request.getParts()) {
-			String fileName = extractFileName(part);
-			String extension = FilenameUtils.getExtension(fileName);
-			if (extension.equals("mp4") || extension.equals("flv") || extension.equals("mkv") || extension.equals("3gp")
-					|| extension.equals("wmv")  ) {
+		if(sessionUser == null) {
+			// Redirect the user to the login page.
+			response.sendRedirect("LoginServlet");
+		}
+		else {
+			String savePath = folderNaming.GetGlobalPath() + sessionUser.GetUsername() + folderNaming.GetPathUpload();
+			
+			for (Part part : request.getParts()) {
+				String fileName = extractFileName(part);
+				String extension = FilenameUtils.getExtension(fileName);
+				if (extension.equals("mp4") || extension.equals("flv") || extension.equals("mkv") || extension.equals("3gp")
+						|| extension.equals("wmv")  ) {
 
-				part.write(savePath + File.separator + fileName);
+					part.write(savePath + File.separator + fileName);
+				}
+				else {
+					validFormat=false;
+					throw new FileNotSupportedException();
+				}
+				
+			}
+			
+			if(validFormat)
+			{
+				request.setAttribute("message", "Upload has been done successfully!");
+				sessionUser.SetVideoUploaded(true);
 			}
 			else
-				validFormat=false;
-			throw new FileNotSupportedException();
+			{
+				request.setAttribute("message", "Not valid video format!");
+			}
 			
+			request.getRequestDispatcher("/jsp/message.jsp").forward(request, response);
 		}
-		
-		if(validFormat)
-		{
-		request.setAttribute("message", "Upload has been done successfully!");
-		user.SetVideoUploaded(true);
-		}
-		else
-		{
-			request.setAttribute("message", "Not valid video format!");
-		}
-		getServletContext().getRequestDispatcher("/message.jsp").forward(request, response);
+
 	}
 
 	/**
