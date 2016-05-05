@@ -46,8 +46,8 @@ public  class UserServiceImpl {
 		      
 		      stmt = (Statement) conn.createStatement();
 		      
-		      String sql = "INSERT INTO USER (username, firstName, lastName, password, email)" +
-		    	        "VALUES (?, ?, ?, ?, ?)";
+		      String sql = "INSERT INTO USER (username, firstName, lastName, password, email) " +
+		    	        "VALUES (?, ?, ?, ?, ?);";
 		      
 		      PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 		      ps.setString(1, username);
@@ -55,6 +55,16 @@ public  class UserServiceImpl {
 		      ps.setString(3, lastName);
 		      ps.setString(4, password);
 		      ps.setString(5, email);
+		      
+		      ps.executeUpdate();
+		      
+		      sql = "INSERT INTO USER_VIDEOS(username, videoUploaded, videoName) " +
+	    	        "VALUES (?, ?, ?);";
+		      
+		      ps = (PreparedStatement) conn.prepareStatement(sql);
+		      ps.setString(1, username);
+		      ps.setInt(2, 0);
+		      ps.setString(3, "");
 		      
 		      ps.executeUpdate();
 		      
