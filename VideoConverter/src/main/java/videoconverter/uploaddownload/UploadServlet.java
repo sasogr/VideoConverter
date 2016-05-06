@@ -65,6 +65,11 @@ public class UploadServlet extends HttpServlet {
 			// Contains the whole video name, including the extension.
 			String fullVideoName = "";
 			
+			UpdateUserVideo updateUserVideo = new UpdateUserVideo();
+			updateUserVideo.SetUsername(sessionUser.GetUsername());
+			
+			updateUserVideo.CheckAndDeleteExistingVideo();
+			
 			try {
 				for (Part part : request.getParts()) {
 					String fileName = extractFileName(part);
@@ -82,8 +87,8 @@ public class UploadServlet extends HttpServlet {
 					
 				}
 				
+				updateUserVideo.SetVideoName(fullVideoName);
 				// Update video entry in the videos table for the user.
-				UpdateUserVideo updateUserVideo = new UpdateUserVideo(sessionUser.GetUsername(), fullVideoName);
 				updateUserVideo.UpdateVideoEntry();
 				
 			}
