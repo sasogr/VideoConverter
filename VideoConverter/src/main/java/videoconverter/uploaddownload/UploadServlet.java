@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 
 import org.apache.commons.io.FilenameUtils;
 
+import videoconverter.businesslogic.UpdateUserVideo;
 import videoconverter.dbconfig.Dbconfig;
 import videoconverter.folderstructure.FolderStructureNaming;
 import videoconverter.model.SessionUser;
@@ -61,22 +62,35 @@ public class UploadServlet extends HttpServlet {
 		}
 		else {
 			String savePath = folderNaming.GetGlobalPath() + sessionUser.GetUsername() + folderNaming.GetPathUpload();
+			// Contains the whole video name, including the extension.
+			String fullVideoName = "";
 			
-			for (Part part : request.getParts()) {
-				String fileName = extractFileName(part);
-				String extension = FilenameUtils.getExtension(fileName);
-				if (extension.equals("mp4") || extension.equals("flv") || extension.equals("mkv") || extension.equals("3gp")
-						|| extension.equals("wmv")  ) {
+			try {
+				for (Part part : request.getParts()) {
+					String fileName = extractFileName(part);
+					String extension = FilenameUtils.getExtension(fileName);
+					if (extension.equals("mp4") || extension.equals("flv") || extension.equals("mkv") || extension.equals("3gp")
+							|| extension.equals("wmv")  ) {
 
-					part.write(savePath + File.separator + fileName);
-				}
-				else {
-					validFormat=false;
-					throw new FileNotSupportedException();
+						part.write(savePath + File.separator + fileName);
+						fullVideoName += fileName;
+					}
+					else {
+						validFormat=false;
+						throw new FileNotSupportedException();
+					}
+					
 				}
 				
+				// Update video entry in the videos table for the user.
+				UpdateUserVideo updateUserVideo = new UpdateUserVideo(sessionUser.GetUsername(), fullVideoName);
+				updateUserVideo.UpdateVideoEntry();
+				
 			}
-			
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+
 			if(validFormat)
 			{
 				request.setAttribute("message", "Upload has been done successfully!");
@@ -84,7 +98,7 @@ public class UploadServlet extends HttpServlet {
 			}
 			else
 			{
-				request.setAttribute("message", "Not valid video format!");
+				request.setAttribute("message", "Not valid video format! Supported formats: mp4, flv, mkv, 3gp, wmv.");
 			}
 			
 			request.getRequestDispatcher("/jsp/message.jsp").forward(request, response);
