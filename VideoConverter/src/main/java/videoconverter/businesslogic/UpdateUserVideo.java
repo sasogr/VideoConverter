@@ -131,4 +131,49 @@ public class UpdateUserVideo {
 		}
 	}
 	
+	public String GetVideoNameUploaded() {
+		String videoNameUploaded = "";
+		
+		Dbconfig dbconfig = new Dbconfig();
+		
+		// Declare the JDBC objects.
+        Connection con = null;
+        ResultSet rs = null;
+		
+		try {
+			// Establish the connection.
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(dbconfig.GetConnectionURL(), dbconfig.GetUsernameDB(), dbconfig.GetPasswordDB());
+            
+            String SQL = "SELECT videoName " +
+        				 "FROM USER_VIDEOS " +
+        				 "WHERE username = ?";
+            
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setString(1, this.username);
+            
+            rs = preparedStatement.executeQuery();
+            
+            // Check if we have any data in the result set.
+            if(rs.isBeforeFirst()) {
+                // There is data in the set.
+            	rs.next();
+                String dbVideoName = rs.getString("videoName");
+                
+                if(dbVideoName != null && !dbVideoName.isEmpty()) {
+                	videoNameUploaded = dbVideoName;
+                }
+                else {
+                	videoNameUploaded = "No video uploaded!";
+                }
+            }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return videoNameUploaded;
+	}
+	
 }
