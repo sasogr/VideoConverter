@@ -13,7 +13,13 @@
 	<script type="text/javascript" src="js/ConvertController/convert.js"></script>
 </head>
 <body ng-controller="ConvertController">
+	<%
+		String uploadedVideoName = (String) request.getAttribute("uploadedVideoName");
+	%>
+	
 	<h1>Step 2. Run commands</h1>
+	
+	<h2>Uploaded video: <%=uploadedVideoName%></h2>
 	
 	<div>
 		<p>Choose a command:</p>

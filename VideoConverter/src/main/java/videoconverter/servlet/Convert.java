@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import videoconverter.businesslogic.UpdateUserVideo;
 import videoconverter.model.SessionUser;
 
 /**
@@ -42,29 +43,31 @@ public class Convert extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		SessionUser sessionUser = (SessionUser)session.getAttribute("sessionUser");
 		
-		//if(sessionUser == null) {
+		if(sessionUser == null) {
 			// User is not logged in.
-			
-			// TODO: Change into the proper sign in controller when it is created.
-			//response.sendRedirect("Signin");
-		//}
-		//else {
+			response.sendRedirect("LoginServlet");
+		}
+		else {
 			// User is logged in.
+			UpdateUserVideo userVideo = new UpdateUserVideo();
+			userVideo.SetUsername(sessionUser.GetUsername());
 			
-			//if(sessionUser.GetVideoUploaded() == false) {
+			boolean userVideoUploaded = userVideo.CheckVideoUploaded();
+			if(userVideoUploaded == false) {
 				// Video has not been uploaded.
-				
-				// TODO: Change into proper upload controller when it is created.
-				//response.sendRedirect("Upload");
-			//}
-			//else {
+				response.sendRedirect("UploadServlet");
+			}
+			else {
 				// Video has been uploaded.
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/jsp/convert.jsp");
-		        rd.forward(request, response);
-			//}
+				// Get the name of the uploaded video.
+				String uploadedVideoName = userVideo.GetVideoNameUploaded();
+				
+				request.setAttribute("uploadedVideoName", uploadedVideoName);
+				request.getRequestDispatcher("/jsp/convert.jsp").forward(request, response);
+			}
 
-		//}
+		}
 		
 	}
 
