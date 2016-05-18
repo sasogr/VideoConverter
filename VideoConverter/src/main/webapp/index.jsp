@@ -16,6 +16,6 @@
 	<br />
 	<a href="Convert">/Convert path</a>
 	<br />
-	<a href="/VideoConverter/UploadServlet">Upload</a>
+	<a href="UploadServlet">Upload</a>
 </body>
 </html>

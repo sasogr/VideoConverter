@@ -46,10 +46,20 @@ public class UploadServlet extends HttpServlet {
 			response.sendRedirect("LoginServlet");
 		}
 		else {
+			UpdateUserVideo userVideo = new UpdateUserVideo();
+			userVideo.SetUsername(sessionUser.GetUsername());
+			
+			boolean userVideoUploaded = userVideo.CheckVideoUploaded();
+			
+			if(userVideoUploaded == true) {
+				String uploadedVideoName = userVideo.GetVideoNameUploaded();
+				
+				request.setAttribute("uploadedVideoName", uploadedVideoName);
+			}
+			
 			request.getRequestDispatcher("/jsp/upload.jsp").forward(request, response);
 		}
-		
-		
+	
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,15 +108,13 @@ public class UploadServlet extends HttpServlet {
 
 			if(validFormat)
 			{
-				request.setAttribute("message", "Upload has been done successfully!");
-				sessionUser.SetVideoUploaded(true);
+				response.sendRedirect("Convert");
 			}
 			else
 			{
-				request.setAttribute("message", "Not valid video format! Supported formats: mp4, flv, mkv, 3gp, wmv.");
+				request.setAttribute("errMessage", "Not valid video format! Supported formats: mp4, flv, mkv, 3gp, wmv.");
+				request.getRequestDispatcher("/jsp/message.jsp").forward(request, response);
 			}
-			
-			request.getRequestDispatcher("/jsp/message.jsp").forward(request, response);
 		}
 
 	}

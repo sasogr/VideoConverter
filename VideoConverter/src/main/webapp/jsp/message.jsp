@@ -8,6 +8,13 @@
 <title>Upload</title>
 </head>
 <body>
-	<h2>${requestScope.message}</h2>
+	<%
+		String errMessage = (String) request.getAttribute("errMessage");
+	%>
+	
+	<h2>Error uploading a video: <%=errMessage%></h2>
+	<br />
+	<br />
+	<a href="UploadServlet">Go back and upload new video!</a>
 </body>
 </html>
