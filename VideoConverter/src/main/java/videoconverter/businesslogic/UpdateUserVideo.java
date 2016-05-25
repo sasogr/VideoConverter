@@ -21,11 +21,13 @@ import videoconverter.folderstructure.FolderStructureNaming;
 public class UpdateUserVideo {
 	private String username;
 	private String videoName;
+	private String linuxVideoName;
 	private FolderStructureNaming folderNaming;
 	
 	public UpdateUserVideo() {
 		this.username = "";
 		this.videoName = "";
+		this.linuxVideoName = "";
 		this.folderNaming = new FolderStructureNaming();
 	}
 	
@@ -35,6 +37,17 @@ public class UpdateUserVideo {
 	
 	public void SetVideoName(String _videoName) {
 		this.videoName = _videoName;
+		
+		// Update the Linux video name
+		String[] videoNameParts = this.videoName.split("\\s+");
+		for(int i = 0; i < videoNameParts.length; i++) {
+			if(i < videoNameParts.length - 1) {
+				this.linuxVideoName += videoNameParts[i] + "\\ ";
+			}
+			else {
+				this.linuxVideoName += videoNameParts[i];
+			}
+		}
 	}
 	
 	public void UpdateVideoEntry() {
@@ -48,12 +61,13 @@ public class UpdateUserVideo {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(dbconfig.GetConnectionURL(), dbconfig.GetUsernameDB(), dbconfig.GetPasswordDB());
             
-            String SQL = "UPDATE USER_VIDEOS SET videoUploaded = ?, videoName = ? WHERE username = ?";
+            String SQL = "UPDATE USER_VIDEOS SET videoUploaded = ?, videoName = ?, linuxVideoName = ? WHERE username = ?";
             
             PreparedStatement preparedStatement = con.prepareStatement(SQL);
             preparedStatement.setInt(1, 1);
             preparedStatement.setString(2, this.videoName);
-            preparedStatement.setString(3, this.username);
+            preparedStatement.setString(3, this.linuxVideoName);
+            preparedStatement.setString(4, this.username);
             
             preparedStatement.executeUpdate();
         }
@@ -109,12 +123,13 @@ public class UpdateUserVideo {
             }
             
             // Update the entry again.
-            SQL = "UPDATE USER_VIDEOS SET videoUploaded = ?, videoName = ? WHERE username = ?";
+            SQL = "UPDATE USER_VIDEOS SET videoUploaded = ?, videoName = ?, linuxVideoName = ? WHERE username = ?";
             
             preparedStatement = con.prepareStatement(SQL);
             preparedStatement.setInt(1, 0);
             preparedStatement.setString(2, null);
-            preparedStatement.setString(3, this.username);
+            preparedStatement.setString(3, null);
+            preparedStatement.setString(4, this.username);
             
             preparedStatement.executeUpdate();
             
@@ -174,6 +189,51 @@ public class UpdateUserVideo {
 		
 		
 		return videoNameUploaded;
+	}
+	
+	public String GetLinuxVideoNameUploaded() {
+		String linuxVideoNameUploaded = "";
+		
+		Dbconfig dbconfig = new Dbconfig();
+		
+		// Declare the JDBC objects.
+        Connection con = null;
+        ResultSet rs = null;
+		
+		try {
+			// Establish the connection.
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(dbconfig.GetConnectionURL(), dbconfig.GetUsernameDB(), dbconfig.GetPasswordDB());
+            
+            String SQL = "SELECT linuxVideoName " +
+        				 "FROM USER_VIDEOS " +
+        				 "WHERE username = ?";
+            
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setString(1, this.username);
+            
+            rs = preparedStatement.executeQuery();
+            
+            // Check if we have any data in the result set.
+            if(rs.isBeforeFirst()) {
+                // There is data in the set.
+            	rs.next();
+                String dbVideoName = rs.getString("linuxVideoName");
+                
+                if(dbVideoName != null && !dbVideoName.isEmpty()) {
+                	linuxVideoNameUploaded = dbVideoName;
+                }
+                else {
+                	linuxVideoNameUploaded = "No video uploaded!";
+                }
+            }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return linuxVideoNameUploaded;
 	}
 	
 	public boolean CheckVideoUploaded() {
