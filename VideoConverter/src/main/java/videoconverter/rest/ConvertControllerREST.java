@@ -155,11 +155,12 @@ public class ConvertControllerREST {
 	}
 	
 	@POST
-	@Path("/executeCommand/{command}")
+	@Path("/executeCommand/{command}/user/{username}")
 	@Produces("application/json")
-	public Response executeCommand(@PathParam("command") String _command) throws JSONException {
+	public Response executeCommand(@PathParam("command") String _command, @PathParam("username") String _username) throws JSONException {
 		FFmpegTerminal terminal = new FFmpegTerminal();
 		terminal.SetTerminalCommand(_command);
+		terminal.SetUsername(_username);
 		
 		String executionOutput = terminal.ExecuteCommand();
 		
