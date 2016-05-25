@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="videoconverter.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="videoConverterApp">
 <head>
@@ -15,6 +16,8 @@
 <body ng-controller="ConvertController">
 	<%
 		String uploadedVideoName = (String) request.getAttribute("uploadedVideoName");
+		HttpSession ses = request.getSession(true);
+		SessionUser sessionUser = (SessionUser)ses.getAttribute("sessionUser");
 	%>
 	
 	<h1>Step 2. Run commands</h1>
@@ -39,7 +42,7 @@
 		<br />
 		<button name="addOption" id="addOption" ng-click="addOption(selectedOption, optionValue)">Add option</button>
 		<button name="clearOptions" id="clearOptions" ng-click="clearOptions()">Clear options</button>
-		<button name="executeCommand" id="executeCommand" ng-click="executeCommand()">Execute command</button>
+		<button name="executeCommand" id="executeCommand" ng-click="executeCommand('<%=sessionUser.GetUsername()%>')">Execute command</button>
 	</div>
 	<div>
 		<p>Preview of the command:</p>
@@ -49,7 +52,7 @@
 	<div class="command-output-outer">
 		<p>Execution output:</p>
 		<div class="command-output-inner">
-			{{terminalOutput.executionOutput}}
+			{{terminalOutput}}
 		</div>
 		
 		<button name="clearTerminal" id="clearTerminal" ng-click="clearTerminal()">Clear terminal</button>

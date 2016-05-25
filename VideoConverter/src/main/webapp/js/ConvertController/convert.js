@@ -64,16 +64,16 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 		$scope.optionsToExecute = '';
 	}
 	
-	$scope.executeCommand = function() {
+	$scope.executeCommand = function(username) {
 		// Create the final command that will be executed in the backend.
 		$scope.finalCommandToBeExecuted = $scope.commandToExecute + $scope.optionsToExecute;
 		
 		$http.post(
-				'rest/convert/executeCommand/' + $scope.finalCommandToBeExecuted
+				'rest/convert/executeCommand/' + $scope.finalCommandToBeExecuted + '/user/' + username
 		)
 		.success(function (data, status) {
             if (status == 200) {
-            	$scope.terminalOutput += data;
+            	$scope.terminalOutput += data.executionOutput + '\n';
             }
         })
         .error(function (data, status) {
