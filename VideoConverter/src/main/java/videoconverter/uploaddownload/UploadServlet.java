@@ -86,7 +86,8 @@ public class UploadServlet extends HttpServlet {
 					String extension = FilenameUtils.getExtension(fileName);
 					if (extension.equals("mp4") || extension.equals("flv") || extension.equals("mkv") || extension.equals("3gp")
 							|| extension.equals("wmv")  ) {
-
+						// Replace empty spaces in the name of the video for easier opening in shell.
+						fileName = fileName.replace(" ", "_");
 						part.write(savePath + File.separator + fileName);
 						fullVideoName += fileName;
 					}
