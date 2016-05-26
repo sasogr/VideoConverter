@@ -84,7 +84,8 @@ public class UpdateUserVideo {
 	}
 	
 	public void CheckAndDeleteExistingVideo() {
-		String pathToVideo = this.folderNaming.GetGlobalPath() + this.username + this.folderNaming.GetPathUpload();
+		String pathToVideoUpload = this.folderNaming.GetGlobalPath() + this.username + this.folderNaming.GetPathUpload();
+		String pathToVideoDownload = this.folderNaming.GetGlobalPath() + this.username + this.folderNaming.GetPathDownload();
 		
 		Dbconfig dbconfig = new Dbconfig();
 		
@@ -115,10 +116,20 @@ public class UpdateUserVideo {
                 if(dbVideoName != null && !dbVideoName.isEmpty()) {
                 	// User has previous video already uploaded. Remove it.
                 	// Add the video name to the path.
-                	pathToVideo += dbVideoName;
+                	pathToVideoUpload += dbVideoName;
+                	pathToVideoDownload += "converted_" + dbVideoName;
                 	
-                	File videoToBeDeleted = new File(pathToVideo);
-                	videoToBeDeleted.delete();
+                	// Delete previous uploaded video.
+                	File uploadVideoToBeDeleted = new File(pathToVideoUpload);
+                	if(uploadVideoToBeDeleted.exists()) {
+                		uploadVideoToBeDeleted.delete();
+                	}
+                	
+                	// Delete previous converted video.
+                	File downloadVideoToBeDeleted = new File(pathToVideoDownload);
+                	if(downloadVideoToBeDeleted.exists()) {
+                		downloadVideoToBeDeleted.delete();
+                	}
                 }
             }
             
