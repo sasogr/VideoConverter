@@ -28,3 +28,15 @@
 .page-header {
 	border-bottom: 0px !important;
 }
+
+.content-top-padding {
+	padding-top: 100px;
+}
+
+.login-username {
+	width: 257px;
+}
+
+.login-password {
+	width: 257px;
+}
