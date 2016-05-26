@@ -20,3 +20,11 @@
  	color: #00ff00;
  	background-color: #1f1f14;
  }
+ 
+.index-login-list {
+    list-style-type:none;
+}
+
+.page-header {
+	border-bottom: 0px !important;
+}
