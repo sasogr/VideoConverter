@@ -1,79 +1,103 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="videoconverter.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <style type="text/css">
- 
-             html, body {
-            width: 100%;
-            height: 100%;
-            font-family: "Helvetica Neue", Helvetica, sans-serif;
-            color: #444;
-            -webkit-font-smoothing: antialiased;
-            background: #f0f0f0;
-        }
- 
-            #container {width:300px; margin:0 auto;}
- 
-            /* Nicely lines up the labels. */
-            form label {display:inline-block; width:140px;}
- 
-            /* You could add a class to all the input boxes instead, if you like. That would be safer, and more backwards-compatible */
-          input[type=text],
-        input[type=password] ,input[type=time],input[type=email]{
-            color: #777;
-            padding-left: 0px;
-            margin: 10px;
-            margin-top: 12px;
-            margin-left: -5px;
-            width: 290px;
-            height: 35px;
-            border: 1px solid #c7d0d2;
-            border-radius: 2px;
-            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
-            -webkit-transition: all .4s ease;
-            -moz-transition: all .4s ease;
-            transition: all .4s ease;
-            }
-            input[type=submit] {
-            float: right;
-            margin-right: 20px;
-            margin-top: 20px;
-            width: 80px;
-            height: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #acd6ef; /*IE fallback*/
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#acd6ef), to(#6ec2e8));
-            background-image: -moz-linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
-            background-image: linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
-            border-radius: 30px;
-            border: 1px solid #66add6;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
-            cursor: pointer;
-        }
- 
-            form .line {clear:both;}
-            form .line.submit {text-align:right;}
- 
-        </style>
-    </head>
-    <body>
-        <div id="container">
-            <form action="/VideoConverter/CreateUserServlet" method="post" >
-                <h1>Register</h1>
-                <div class="line"><label for="firstName"> First Name *: </label><input type="text" name="firstName"  /></div>
-                <div class="line"><label for="lastName">Last Name *: </label><input type="text" name="lastName" /></div>
-                <div class="line"><label for="username">Username *: </label><input type="text" name="username" /></div>
-                <div class="line"><label for="pwd">Password *: </label><input type="password" name="password" /></div>
-                <div class="line"><label for="email">Email *: </label><input type="email" name="email" /></div>
-              
-                <div class="line submit"><input type="submit" value="Submit" /></div>
- 
-                <p>Note: Please make sure your details are correct before submitting form and that all fields marked with * are completed!.</p>
-            </form>
-        </div>
-    </body>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VideoConverter | Register</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/Site.css">
+	<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+
+                  <a class="navbar-brand">VideoConverter</a>
+              </div>
+              <div style="height: 1px;" class="navbar-collapse navbar-responsive-collapse collapse">
+	            <ul class="nav navbar-nav">
+	                <li><a href="index.jsp">Home</a></li>
+	                <li><a href="UploadServlet">Upload</a></li>
+	                <li><a href="Convert">Convert</a></li>
+	                <li><a href="DownloadServlet">Download</a></li>
+	            </ul>
+	
+	            <ul class="nav navbar-nav navbar-right index-login-list">
+	                <%
+	                    HttpSession ses = request.getSession(true);
+	                	SessionUser sessionUser = (SessionUser)ses.getAttribute("sessionUser");
+	                    if(sessionUser != null){
+	                        %>
+	                        <li class="active"><a href="Logout">Hello <%=sessionUser.GetUsername()%>, logout</a></li>
+	                    <%}
+	                    else{
+	                        %>
+	                        <li class="active"><a href="LoginServlet">Login</a></li>
+	                    <%}
+	                %>                
+	            </ul>
+	        </div>
+	    </div>
+	</nav>
+	
+	<div class="container content-top-padding">
+		<!-- HTML CODE HERE --> 
+		<div id="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<h2>Register</h2>
+					<form action="/VideoConverter/CreateUserServlet" method="post" >
+				        <label for="firstName"> First Name:</label>
+				        <br />
+				        <input type="text" name="firstName"  />
+				        
+				        <br /><br />
+				        <label for="lastName">Last Name:</label>
+				        <br />
+				        <input type="text" name="lastName" />
+				        
+				        <br /><br />
+				        <label for="username">Username:</label>
+				        <br />
+				        <input type="text" name="username" />
+				        
+				        <br /><br />
+				        <label for="pwd">Password:</label>
+				        <br />
+				        <input type="password" name="password" />
+				        
+				        <br /><br />
+				        <label for="email">Email:</label>
+				        <br />
+				        <input type="email" name="email" />
+				      	
+				      	<br />
+				      	<p>Note: Please make sure your details are correct before submitting form!</p>
+				     	
+				     	<br />
+				        <input class="btn btn-primary" type="submit" value="Submit" />
+				    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="navbar navbar-fixed-bottom">
+		<footer class="footer">
+        	VideoConverter | &copy; 2016
+        </footer>
+	</div>
+</body>
 </html>

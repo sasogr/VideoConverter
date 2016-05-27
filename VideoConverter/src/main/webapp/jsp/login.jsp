@@ -63,16 +63,14 @@
 			            <br />
 			            <input class="login-username" type="text" id="username" name="username">
 			            
-			            <br />
-			            <br />
+			            <br /><br />
 			            <label for="password">Password:</label>
 			            <br />
 			            <input class="login-password" type="password" id="password" name="password">
 			            
 			            <br />
 			            <a href="SignUpServlet">Don't have an account? Register here!</a>
-			            <br />
-			            <br />
+			            <br /><br />
 		               <!--<input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label> -->
 		               <input class="btn btn-primary" type="submit" value="Sign in">
 			        </form>
@@ -81,17 +79,10 @@
 	    </div>
 	</div>
 	
-	<div class="container">
-	     <div class="row">
-	         <footer>
-	             <div class="panel-footer text-center text-primary navbar-fixed-bottom">
-	                 VideoConverter | &copy; 2016
-	             </div>
-	         </footer>
-	     </div>
-	 </div>
-	
-    
-   
+	<div class="navbar navbar-fixed-bottom">
+		<footer class="footer">
+        	VideoConverter | &copy; 2016
+        </footer>
+	</div>
 </body>
 </html>
