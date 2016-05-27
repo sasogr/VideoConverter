@@ -54,3 +54,11 @@
 	color: #008CBA;
 	background-color: #F5F5F5;
 }
+
+.content-upload {
+	text-align: center;
+}
+
+.file-upload {
+	display: inline-block !important;
+}
