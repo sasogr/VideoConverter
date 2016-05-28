@@ -34,4 +34,4 @@ INSERT INTO FFMPEG_OPTIONS (optionTo, name, commandValue, acceptInput)
 VALUES (2, '-codecs', '-codecs', 0), (2, '-c:v', '-c:v', 1), (2, '-c:a', '-c:a', 1), 
 (2, '-b', '-b', 1), (2, '-vframes', '-vframes', 1), (2, '-r', '-r', 1), 
 (2, '-s', '-s', 1), (2, '-aspect', '-aspect', 1), (2, '-maxrate', '-maxrate', 1), 
-(2, '-bufsize', '-bufsize', 1), (2, '-minrate', '-minrate', 1);
+(2, '-bufsize', '-bufsize', 1), (2, '-minrate', '-minrate', 1), (2, '-f', '-f', 1);
