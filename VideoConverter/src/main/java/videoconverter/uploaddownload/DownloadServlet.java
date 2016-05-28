@@ -47,25 +47,32 @@ public class DownloadServlet extends HttpServlet {
 							videoNaming.GetDownloadVideoName() + videoFormat;
 					
 					File downloadFile = new File(downloadFilePath);
-			        FileInputStream inStream = new FileInputStream(downloadFile);
-			        
-			        // Forces download
-			        String headerKey = "Content-Disposition";
-			        String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
-			        response.setHeader(headerKey, headerValue);
-			        
-			        // Obtain response's output stream
-			        OutputStream outStream = response.getOutputStream();
-			         
-			        byte[] buffer = new byte[4096];
-			        int bytesRead = -1;
-			         
-			        while ((bytesRead = inStream.read(buffer)) != -1) {
-			            outStream.write(buffer, 0, bytesRead);
-			        }
-			        
-			        inStream.close();
-			        outStream.close();
+					
+					if(downloadFile.exists()) {
+						FileInputStream inStream = new FileInputStream(downloadFile);
+				        
+				        // Forces download
+				        String headerKey = "Content-Disposition";
+				        String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+				        response.setHeader(headerKey, headerValue);
+				        
+				        // Obtain response's output stream
+				        OutputStream outStream = response.getOutputStream();
+				         
+				        byte[] buffer = new byte[4096];
+				        int bytesRead = -1;
+				         
+				        while ((bytesRead = inStream.read(buffer)) != -1) {
+				            outStream.write(buffer, 0, bytesRead);
+				        }
+				        
+				        inStream.close();
+				        outStream.close();
+					}
+					else {
+						// Video is missing.
+						response.sendRedirect("UploadServlet");
+					}
 				}
 				catch(Exception e) {
 					e.printStackTrace();
