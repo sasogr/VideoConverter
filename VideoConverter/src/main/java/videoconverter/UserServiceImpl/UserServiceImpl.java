@@ -58,13 +58,15 @@ public  class UserServiceImpl {
 		      
 		      ps.executeUpdate();
 		      
-		      sql = "INSERT INTO USER_VIDEOS(username, videoUploaded, videoName) " +
-	    	        "VALUES (?, ?, ?);";
+		      sql = "INSERT INTO USER_VIDEOS(username, videoUploaded, videoName, linuxVideoName, videoDownloadFormat) " +
+	    	        "VALUES (?, ?, ?, ?, ?);";
 		      
 		      ps = (PreparedStatement) conn.prepareStatement(sql);
 		      ps.setString(1, username);
 		      ps.setInt(2, 0);
 		      ps.setString(3, null);
+		      ps.setString(4, null);
+		      ps.setString(5, null);
 		      
 		      ps.executeUpdate();
 		      

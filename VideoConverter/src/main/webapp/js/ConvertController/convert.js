@@ -8,8 +8,10 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 	$scope.optionsToExecute = '';
 	// Holds the execute command.
 	$scope.finalCommandToBeExecuted = '';
-	// Holds the execution output of the terminal.ss
+	// Holds the execution output of the terminal.
 	$scope.terminalOutput = '';
+	// Holds the format output specified by the user when using FFMPEG.
+	$scope.formatOutput = 'no_format';
 	
 	$scope.getCommands = function () {
 		$http.get(
@@ -64,6 +66,11 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 			else if(selectedOption.name == 'stream') {
 				$scope.optionsToExecute += '=' + optionValue + ' ';
 			}
+			else if(selectedOption.name == '-f') {
+				$scope.optionsToExecute += ' ' + optionValue + ' ';
+				// Set the output format of the video.
+				$scope.formatOutput = optionValue;
+			}
 			else {
 				$scope.optionsToExecute += ' ' + optionValue + ' ';
 			}
@@ -83,7 +90,7 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 		$scope.finalCommandToBeExecuted = $scope.commandToExecute + $scope.optionsToExecute;
 		
 		$http.post(
-				'rest/convert/executeCommand/' + $scope.finalCommandToBeExecuted + '/user/' + username
+				'rest/convert/executeCommand/' + $scope.finalCommandToBeExecuted + '/user/' + username + '/format/' + $scope.formatOutput
 		)
 		.success(function (data, status) {
             if (status == 200) {
