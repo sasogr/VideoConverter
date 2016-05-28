@@ -68,18 +68,15 @@
 					
 					<br />
 					<a href="Convert">Convert the video</a>
-					<br />
-					<br />
-					
-					OR
 				</p>
+				<h4><b>OR</b></h4>
 			<%}
 		%>
 		
 		<form method="post" action="/VideoConverter/UploadServlet"
 			enctype="multipart/form-data">
 			Select file to upload: <input class="file-upload" type="file" name="file" size="60" /><br />
-			<br /> <input type="submit" value="Upload" />
+			<br /> <input class="btn btn-success" type="submit" value="Upload" />
 		</form>
 	</div>
 	
