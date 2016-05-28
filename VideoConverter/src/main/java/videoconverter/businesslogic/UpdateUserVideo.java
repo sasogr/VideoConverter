@@ -355,6 +355,49 @@ public class UpdateUserVideo {
 		return linuxVideoNameUploaded;
 	}
 	
+	public String GetDownloadVideoFormat() {
+		String downloadVideoFormat= "";
+		Dbconfig dbconfig = new Dbconfig();
+		
+		// Declare the JDBC objects.
+        Connection con = null;
+        ResultSet rs = null;
+		
+		try {
+			// Establish the connection.
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(dbconfig.GetConnectionURL(), dbconfig.GetUsernameDB(), dbconfig.GetPasswordDB());
+            
+            String SQL = "SELECT videoDownloadFormat " +
+        				 "FROM USER_VIDEOS " +
+        				 "WHERE username = ?";
+            
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setString(1, this.username);
+            
+            rs = preparedStatement.executeQuery();
+            
+            // Check if we have any data in the result set.
+            if(rs.isBeforeFirst()) {
+                // There is data in the set.
+            	rs.next();
+                String dbVideoDownloadFormat = rs.getString("videoDownloadFormat");
+                
+                if(dbVideoDownloadFormat != null && !dbVideoDownloadFormat.isEmpty()) {
+                	downloadVideoFormat = dbVideoDownloadFormat;
+                }
+                else {
+                	downloadVideoFormat = "No format!";
+                }
+            }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return downloadVideoFormat;
+	}
+	
 	public boolean CheckVideoUploaded() {
 		boolean videoUploaded = false;
 		
