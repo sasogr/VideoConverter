@@ -40,7 +40,7 @@
 	                	SessionUser sessionUser = (SessionUser)ses.getAttribute("sessionUser");
 	                    if(sessionUser != null){
 	                        %>
-	                        <li class="active"><a href="Logout">Hello <%=sessionUser.GetUsername()%>, logout</a></li>
+	                        <li><a href="Logout">Hello <%=sessionUser.GetUsername()%>, logout</a></li>
 	                    <%}
 	                    else{
 	                        %>

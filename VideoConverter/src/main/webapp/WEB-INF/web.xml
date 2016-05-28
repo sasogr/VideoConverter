@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>videoconverter.servlet.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Logout</servlet-name>
+  	<display-name>Logout</display-name>
+  	<description></description>
+  	<servlet-class>videoconverter.servlet.Logout</servlet-class>
+  </servlet>
   
 	<servlet-mapping>
 		<servlet-name>VideoConverter REST</servlet-name>
@@ -24,6 +30,10 @@
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
 	</servlet-mapping>
 	
 	
