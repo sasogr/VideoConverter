@@ -51,8 +51,22 @@ angular.module('videoConverterApp').controller('ConvertController', ['$scope', '
 		$scope.optionsToExecute += selectedOption.commandValue;
 		
 		if(selectedOption.acceptInput == 1) {
-			// If the option requires input, add the input to the option.
-			$scope.optionsToExecute += '=' + optionValue + ' ';
+			// Option - format
+			if(selectedOption.name == 'format') {
+				if(optionValue == null) {
+					$scope.optionsToExecute += ' ';
+				}
+				else {
+					// If the option requires input, add the input to the option.
+					$scope.optionsToExecute += '=' + optionValue + ' ';
+				}
+			}
+			else if(selectedOption.name == 'stream') {
+				$scope.optionsToExecute += '=' + optionValue + ' ';
+			}
+			else {
+				$scope.optionsToExecute += ' ' + optionValue + ' ';
+			}
 		}
 		else {
 			// Otherwise, add empty space for further options.
