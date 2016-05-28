@@ -28,7 +28,7 @@
               </div>
               <div style="height: 1px;" class="navbar-collapse navbar-responsive-collapse collapse">
 	            <ul class="nav navbar-nav">
-	                <li><a href="index.jsp">Home</a></li>
+	                <li class="active"><a href="index.jsp">Home</a></li>
 	                <li><a href="UploadServlet">Upload</a></li>
 	                <li><a href="Convert">Convert</a></li>
 	                <li><a href="DownloadServlet">Download</a></li>
