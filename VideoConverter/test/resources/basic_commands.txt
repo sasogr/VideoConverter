@@ -1,0 +1,20 @@
+ffprobe -v error -show_entries format [video_name] | informations about video format
+ffprobe -v error -show_entries format=nb_streams [video_name] | informations about number of streams
+ffprobe -v error -show_entries streams [video_name] | informations about each of the streams
+ffprobe -v error -show_entries format=bit_rate [video_name] | informations about bit rate
+ffprobe -v error -select_streams [number_of_stream] -show_entries stream=[stream_option] [video_name] | informations only for the specified stream
+ffprobe -v error -select_streams [number_of_stream] -show_frames [video_name] | frame information only for the specified stream
+
+ffmpeg
+ffmpeg -i [input_video_name] -c:v [video_codec] [codec_options] -c:a [audio_codec] [codec_options] [output_file_name] | the general syntax of ffmpeg
+ffmpeg -codecs | list of all available codecs
+
+The options of ffmpeg consist of:
+ -b [bitrate] | bit/s (default = 200kb/s)
+ -vframes [frames] | number of frames
+ -r [fps] | number of frames per second (Hz value, default = 25)
+ -s [size] | size of frames in format wxh
+ -aspect [aspect] | example format: 16:9
+ -maxrate [bitrate] | maximum bit rate
+ -bufsize [size] | buffer size
+ -minrate [bitrate] | minimum bit rate

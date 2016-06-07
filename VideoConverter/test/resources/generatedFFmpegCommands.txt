@@ -1,0 +1,60 @@
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v h264 -c:a eac3 [output_file_name]# _h264_eac3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v h264 -c:a eac3 [output_file_name]# _h264_eac3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v h264 -c:a eac3 [output_file_name]# _h264_eac3_640.mp4
+ffmpeg -i [input_video_name] -c:v h264 -c:a eac3 [output_file_name]# _h264_eac3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v h264 -c:a mp3 [output_file_name]# _h264_mp3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v h264 -c:a mp3 [output_file_name]# _h264_mp3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v h264 -c:a mp3 [output_file_name]# _h264_mp3_640.mp4
+ffmpeg -i [input_video_name] -c:v h264 -c:a mp3 [output_file_name]# _h264_mp3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v h264 -c:a aac [output_file_name]# _h264_aac_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v h264 -c:a aac [output_file_name]# _h264_aac_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v h264 -c:a aac [output_file_name]# _h264_aac_640.mp4
+ffmpeg -i [input_video_name] -c:v h264 -c:a aac [output_file_name]# _h264_aac_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v hevc -c:a eac3 [output_file_name]# _hevc_eac3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v hevc -c:a eac3 [output_file_name]# _hevc_eac3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v hevc -c:a eac3 [output_file_name]# _hevc_eac3_640.mp4
+ffmpeg -i [input_video_name] -c:v hevc -c:a eac3 [output_file_name]# _hevc_eac3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v hevc -c:a mp3 [output_file_name]# _hevc_mp3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v hevc -c:a mp3 [output_file_name]# _hevc_mp3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v hevc -c:a mp3 [output_file_name]# _hevc_mp3_640.mp4
+ffmpeg -i [input_video_name] -c:v hevc -c:a mp3 [output_file_name]# _hevc_mp3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v hevc -c:a aac [output_file_name]# _hevc_aac_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v hevc -c:a aac [output_file_name]# _hevc_aac_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v hevc -c:a aac [output_file_name]# _hevc_aac_640.mp4
+ffmpeg -i [input_video_name] -c:v hevc -c:a aac [output_file_name]# _hevc_aac_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v mpeg4 -c:a eac3 [output_file_name]# _mpeg4_eac3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v mpeg4 -c:a eac3 [output_file_name]# _mpeg4_eac3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v mpeg4 -c:a eac3 [output_file_name]# _mpeg4_eac3_640.mp4
+ffmpeg -i [input_video_name] -c:v mpeg4 -c:a eac3 [output_file_name]# _mpeg4_eac3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v mpeg4 -c:a mp3 [output_file_name]# _mpeg4_mp3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v mpeg4 -c:a mp3 [output_file_name]# _mpeg4_mp3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v mpeg4 -c:a mp3 [output_file_name]# _mpeg4_mp3_640.mp4
+ffmpeg -i [input_video_name] -c:v mpeg4 -c:a mp3 [output_file_name]# _mpeg4_mp3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v mpeg4 -c:a aac [output_file_name]# _mpeg4_aac_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v mpeg4 -c:a aac [output_file_name]# _mpeg4_aac_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v mpeg4 -c:a aac [output_file_name]# _mpeg4_aac_640.mp4
+ffmpeg -i [input_video_name] -c:v mpeg4 -c:a aac [output_file_name]# _mpeg4_aac_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v vp8 -c:a eac3 [output_file_name]# _vp8_eac3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v vp8 -c:a eac3 [output_file_name]# _vp8_eac3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v vp8 -c:a eac3 [output_file_name]# _vp8_eac3_640.mp4
+ffmpeg -i [input_video_name] -c:v vp8 -c:a eac3 [output_file_name]# _vp8_eac3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v vp8 -c:a mp3 [output_file_name]# _vp8_mp3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v vp8 -c:a mp3 [output_file_name]# _vp8_mp3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v vp8 -c:a mp3 [output_file_name]# _vp8_mp3_640.mp4
+ffmpeg -i [input_video_name] -c:v vp8 -c:a mp3 [output_file_name]# _vp8_mp3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v vp8 -c:a aac [output_file_name]# _vp8_aac_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v vp8 -c:a aac [output_file_name]# _vp8_aac_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v vp8 -c:a aac [output_file_name]# _vp8_aac_640.mp4
+ffmpeg -i [input_video_name] -c:v vp8 -c:a aac [output_file_name]# _vp8_aac_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v vp9 -c:a eac3 [output_file_name]# _vp9_eac3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v vp9 -c:a eac3 [output_file_name]# _vp9_eac3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v vp9 -c:a eac3 [output_file_name]# _vp9_eac3_640.mp4
+ffmpeg -i [input_video_name] -c:v vp9 -c:a eac3 [output_file_name]# _vp9_eac3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v vp9 -c:a mp3 [output_file_name]# _vp9_mp3_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v vp9 -c:a mp3 [output_file_name]# _vp9_mp3_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v vp9 -c:a mp3 [output_file_name]# _vp9_mp3_640.mp4
+ffmpeg -i [input_video_name] -c:v vp9 -c:a mp3 [output_file_name]# _vp9_mp3_original.mp4
+ffmpeg -i [input_video_name] -vf scale=320:-1 -c:v vp9 -c:a aac [output_file_name]# _vp9_aac_320.mp4
+ffmpeg -i [input_video_name] -vf scale=480:-1 -c:v vp9 -c:a aac [output_file_name]# _vp9_aac_480.mp4
+ffmpeg -i [input_video_name] -vf scale=640:-1 -c:v vp9 -c:a aac [output_file_name]# _vp9_aac_640.mp4
+ffmpeg -i [input_video_name] -c:v vp9 -c:a aac [output_file_name]# _vp9_aac_original.mp4
