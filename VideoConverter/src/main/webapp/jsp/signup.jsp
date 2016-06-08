@@ -56,7 +56,7 @@
 		<!-- HTML CODE HERE --> 
 		<div id="container">
 			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
+				<div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-12">
 					<h2>Register</h2>
 					<form action="/VideoConverter/CreateUserServlet" method="post" >
 				        <label for="firstName"> First Name:</label>

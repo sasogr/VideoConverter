@@ -65,6 +65,19 @@
                  </div>
              </div>
          </div>
+         <div class="row">
+         	<h2>About VideoConverter</h2>
+         	<p>
+         		VideoConverter is an application for academic use. It is based on <a href="https://ffmpeg.org/" target="_blank">FFMPEG</a>, terminal cross-platform 
+         		application to record, convert, stream audio and video.
+         		<br />
+         		Because the application utilises the use of <a href="https://ffmpeg.org/" target="_blank">FFMPEG</a>, check out the 
+         		<a href="https://www.ffmpeg.org/documentation.html" target="_blank">FFMPEG documentation</a> for a head start!
+         		<br />
+         		To be able to use the application, you need to <a href="SignUpServlet" target="_blank">create an account</a> 
+         		(or, if you have one - <a href="LoginServlet" target="_blank">sign in</a>).
+         	</p>
+         </div>
 	</div>
 	
 	<div class="navbar navbar-fixed-bottom">

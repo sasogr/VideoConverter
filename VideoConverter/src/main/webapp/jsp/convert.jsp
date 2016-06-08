@@ -61,7 +61,7 @@
 		%>
 		<div id="container">
 		    <div class="row">
-		    	<div class="col-md-6">
+		    	<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
 		    		<h2>Step 2. Run commands</h2>
 					<h3 class="text-primary">Uploaded video: <%=uploadedVideoName%></h3>
 					<br />
@@ -90,7 +90,7 @@
 						{{commandToExecute}}{{optionsToExecute}}
 					</div>
 		    	</div>
-		    	<div class="col-md-6">
+		    	<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
 		    		<div class="command-output-outer">
 						<h4>Execution output:</h4>
 						<div class="command-output-inner">
