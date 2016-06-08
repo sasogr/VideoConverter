@@ -1,5 +1,10 @@
 package videoconverter.upload_download;
 
+/*
+ * AUTHOR: Danail Tavcioski
+ * v1.0b
+ */
+
 import org.junit.Test;
 
 import junit.framework.Assert;
